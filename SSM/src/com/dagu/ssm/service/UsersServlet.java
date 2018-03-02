@@ -26,7 +26,7 @@ public class UsersServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub修改了源代码
+		// TODO Auto-generated method stub在github上做的修改
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	
 	}
