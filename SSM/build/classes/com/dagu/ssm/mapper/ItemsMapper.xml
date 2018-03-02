@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dagu.ssm.mapper.ItemsMapper" >
+
+  <insert id="addItems" parameterType="com.dagu.ssm.pojo.Items">
+  	INSERT INTO 
+  	items( name, price, pic, createtime, detail)
+  	VALUES( #{name} , #{price} , #{pic} , #{createtime} , #{detail} )
+  </insert>
+  
+  <select id="selectItemsList" resultType="com.dagu.ssm.pojo.Items" >
+  	SELECT * FROM items;
+  </select>
+  
+  <select id="selectItemsByID" parameterType="java.lang.Integer" resultType="com.dagu.ssm.pojo.Items" >
+  	SELECT * FROM items WHERE id = #{id};
+  </select>
+  
+  <delete id="deleteItemsByID" parameterType="int" >
+  	DELETE FROM items 
+  	WHERE id=#{id};
+  </delete>
+  
+  <update id="updateItemsByID" parameterType="com.dagu.ssm.pojo.Items">
+  	update items
+    set name = #{name}, price = #{price}, pic = #{pic},createtime = #{createtime},detail=#{detail}
+    where id = #{id}
+  </update>
+  
+  <!-- sql片段 -->
+  <sql id="whereItems">
+  	<if test="name!=null and name!=''">
+  		AND name LIKE '%${name}%'
+  	</if>
+  	<if test="detail!=null and detail!=''">
+  		AND detail LIKE '%${detail}%'
+  	</if>
+  </sql>
+  
+  <!-- 多条件查询 -->
+  <select id="selectItemsBySQL" parameterType="com.dagu.ssm.pojo.Items" resultType="com.dagu.ssm.pojo.Items">
+  	SELECT * FROM items 
+  	<where>
+  		<include refid="whereItems" />
+  	</where>
+  </select>
+  
+</mapper>
